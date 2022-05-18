@@ -109,6 +109,30 @@ public class MyDummyHeadLinkedList<E> {
         return false;
     }
 
+    public E remove(Integer index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Remove failed. Illegal index");
+        }
+        Node pre = dummyHead;
+        for (int i = 0; i < index; i++) {
+            pre = pre.next;
+        }
+        Node delNode = pre.next;
+        pre.next = delNode.next;
+        delNode.next = null;
+        size--;
+
+        return delNode.e;
+    }
+
+    public E removeFirst() {
+        return remove(0);
+    }
+
+    public E removeLast() {
+        return remove(size - 1);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -135,6 +159,14 @@ public class MyDummyHeadLinkedList<E> {
         myLinkedList.add(3, 50);
         System.out.println(myLinkedList);
         myLinkedList.set(5, 100);
+        System.out.println(myLinkedList);
+
+        System.out.println("开始删除");
+        myLinkedList.remove(5);
+        System.out.println(myLinkedList);
+        myLinkedList.removeFirst();
+        System.out.println(myLinkedList);
+        myLinkedList.removeLast();
         System.out.println(myLinkedList);
     }
 }
